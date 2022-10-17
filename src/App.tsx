@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Button, Popup, Title } from "components";
 import { useClicker } from "hooks";
 import styles from "./App.module.scss";
