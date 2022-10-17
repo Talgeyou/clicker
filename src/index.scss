@@ -1,0 +1,22 @@
+@import "theme/_colors.scss";
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body,
+button,
+input,
+textarea,
+select {
+    font-family: sans-serif;
+}
+
+body {
+    background-color: $color-blue;
+}

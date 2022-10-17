@@ -1,0 +1,12 @@
+@import "theme/_colors.scss";
+
+.Title {
+    font-size: 36px;
+    color: $color-black;
+
+    &_level {
+        &_2 {
+            font-size: 24px;
+        }
+    }
+}

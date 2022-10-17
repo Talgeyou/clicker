@@ -1,0 +1,38 @@
+@import "theme/_colors.scss";
+
+.Button {
+    width: 100%;
+    padding: 0.5em;
+    border: none;
+    border-radius: 8px;
+    background-color: $color-yellow;
+    font-size: 18px;
+    color: $color-black;
+    transition: background-color 200ms ease-in;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $color-pink;
+    }
+
+    &_shake {
+        animation: shake 200ms;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+        background-color: $color-red;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(50%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
