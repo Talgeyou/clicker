@@ -1,3 +1,4 @@
+import { v4 } from "uuid";
 import { getFibonacciNumber } from "helpers";
 import { ClickerState } from "./types";
 
@@ -6,11 +7,12 @@ export enum ActionType {
     IncrementLevel = "INCREMENT_LEVEL",
     IncrementWorkerLevel = "INCREMENT_WORKER_LEVEL",
     DoWork = "DoWork",
+    AddWorker = "ADD_WORKER",
 }
 
 type State = ClickerState;
 
-export type Action = IncrementCounter | IncrementLevel | IncrementWorkerLevel | DoWork;
+export type Action = IncrementCounter | IncrementLevel | IncrementWorkerLevel | DoWork | AddWorker;
 
 type IncrementCounter = {
     type: ActionType.IncrementCounter;
@@ -22,10 +24,15 @@ type IncrementLevel = {
 
 type IncrementWorkerLevel = {
     type: ActionType.IncrementWorkerLevel;
+    payload: string;
 };
 
 type DoWork = {
     type: ActionType.DoWork;
+};
+
+type AddWorker = {
+    type: ActionType.AddWorker;
 };
 
 export function reducer(state: State, action: Action): State {
@@ -52,23 +59,45 @@ export function reducer(state: State, action: Action): State {
             };
         }
         case ActionType.IncrementWorkerLevel: {
-            const newWorkerLevel = state.workerLevel + 1;
-            const newCounter = state.counter - state.workerUpgradeCost;
-            const newWorkerUpgradeCost = getFibonacciNumber(newWorkerLevel + 2);
+            const worker = state.workers.find((item) => item.id === action.payload);
+
+            if (!worker) return state;
+
+            const newWorkerLevel = worker.level + 1;
+            const newCounter = state.counter - worker.upgradeCost;
+            const newWorkerUpgradeCost = getFibonacciNumber(newWorkerLevel + 6);
 
             return {
                 ...state,
-                workerLevel: newWorkerLevel,
+                workers: state.workers.map((item) =>
+                    item.id === action.payload
+                        ? { ...item, level: newWorkerLevel, upgradeCost: newWorkerUpgradeCost }
+                        : item,
+                ),
                 counter: newCounter,
-                workerUpgradeCost: newWorkerUpgradeCost,
             };
         }
         case ActionType.DoWork: {
-            const newCounter = state.counter + state.workerLevel;
+            const newCounter =
+                state.counter +
+                state.workers.reduce(
+                    (accumulator, currentWorker) => (accumulator += currentWorker.level),
+                    0,
+                );
 
             return {
                 ...state,
                 counter: newCounter,
+            };
+        }
+        case ActionType.AddWorker: {
+            return {
+                ...state,
+                workers: [
+                    ...state.workers,
+                    { id: v4(), level: 1, upgradeCost: getFibonacciNumber(7) },
+                ],
+                counter: state.counter - state.workerBuyCost,
             };
         }
         default:

@@ -29,6 +29,7 @@ function Title<E extends ElementType = typeof defaultElement>({
                 styles["Title"],
                 {
                     [styles["Title_level_2"]]: level === 2,
+                    [styles["Title_level_3"]]: level === 3,
                 },
                 className,
             )}

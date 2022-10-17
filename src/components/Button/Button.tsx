@@ -5,6 +5,7 @@ import styles from "./Button.module.scss";
 type OwnProps<E extends ElementType = ElementType> = {
     children: ReactNode;
     className?: string;
+    size?: "l" | "m" | "s";
     as?: E;
     onClick?: () => void;
 };
@@ -18,6 +19,7 @@ function Button<E extends ElementType = typeof defaultElement>({
     className,
     children,
     as,
+    size,
     onClick,
     ...otherProps
 }: Props<E>) {
@@ -56,6 +58,7 @@ function Button<E extends ElementType = typeof defaultElement>({
                 styles["Button"],
                 {
                     [styles["Button_shake"]]: state.wasClicked,
+                    [styles["Button_size_s"]]: size === "s",
                 },
                 className,
             )}

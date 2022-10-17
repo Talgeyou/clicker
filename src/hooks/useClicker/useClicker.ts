@@ -8,8 +8,8 @@ const initialState: ClickerState = {
     counter: 0,
     totalClicks: 0,
     clickerUpgradeCost: getFibonacciNumber(1),
-    workerLevel: 0,
-    workerUpgradeCost: getFibonacciNumber(1 + 2),
+    workers: [],
+    workerBuyCost: getFibonacciNumber(6),
 };
 
 export function useClicker(): ClickerHookResult {
@@ -27,9 +27,16 @@ export function useClicker(): ClickerHookResult {
         });
     }, []);
 
-    const incrementWorkerLevel = useCallback(() => {
+    const incrementWorkerLevel = useCallback((workerId: string) => {
         dispatch({
             type: ActionType.IncrementWorkerLevel,
+            payload: workerId,
+        });
+    }, []);
+
+    const addWorker = useCallback(() => {
+        dispatch({
+            type: ActionType.AddWorker,
         });
     }, []);
 
@@ -50,5 +57,6 @@ export function useClicker(): ClickerHookResult {
         incrementCounter,
         incrementLevel,
         incrementWorkerLevel,
+        addWorker,
     };
 }

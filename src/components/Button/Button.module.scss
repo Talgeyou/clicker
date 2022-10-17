@@ -10,6 +10,12 @@
     color: $color-black;
     transition: background-color 200ms ease-in;
 
+    &_size {
+        &_s {
+            font-size: 14px;
+        }
+    }
+
     &:hover {
         cursor: pointer;
         background-color: $color-pink;
