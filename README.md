@@ -72,8 +72,8 @@ The only thing you need is node.js installed on your computer
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/Talgeyou/budget-planner
-   cd budget-planner
+   git clone https://github.com/Talgeyou/clicker
+   cd clicker
    ```
 2. Install NPM packages
    ```sh
