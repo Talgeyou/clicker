@@ -1,8 +1,8 @@
-# Anime Project
+# Clicker
 
 ## Description
 
-Anime scheduling, information and trailers
+Simple web game
 
 ## Dependencies
 
